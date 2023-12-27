@@ -1,22 +1,7 @@
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const {type} = require('../../utils');
-const input = require('../input');
+import { Color } from '../../color';
+import { to } from '../to';
+import { hex2rgb } from './hex2rgb';
+import { rgb2hex } from './rgb2hex.js';
 
-const rgb2hex = require('./rgb2hex');
-
-Color.prototype.hex = function(mode) {
-    return rgb2hex(this._rgb, mode);
-};
-
-chroma.hex = (...args) => new Color(...args, 'hex');
-
-input.format.hex = require('./hex2rgb');
-input.autodetect.push({
-    p: 4,
-    test: (h, ...rest) => {
-        if (!rest.length && type(h) === 'string' && [3,4,5,6,7,8,9].indexOf(h.length) >= 0) {
-            return 'hex';
-        }
-    }
-})
+export const hex = arg => new Color(hex2rgb(arg));
+export const toHex = (c, mode = undefined) => to(c, c => rgb2hex(c._rgb, mode));

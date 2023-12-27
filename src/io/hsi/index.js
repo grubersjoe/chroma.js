@@ -1,24 +1,7 @@
-const {unpack, type} = require('../../utils');
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const input = require('../input');
+import { Color } from '../../color';
+import { to } from '../to';
+import { hsi2rgb } from './hsi2rgb';
+import { rgb2hsi } from './rgb2hsi.js';
 
-const rgb2hsi = require('./rgb2hsi');
-
-Color.prototype.hsi = function() {
-    return rgb2hsi(this._rgb);
-};
-
-chroma.hsi = (...args) => new Color(...args, 'hsi');
-
-input.format.hsi = require('./hsi2rgb');
-
-input.autodetect.push({
-    p: 2,
-    test: (...args) => {
-        args = unpack(args, 'hsi');
-        if (type(args) === 'array' && args.length === 3) {
-            return 'hsi';
-        }
-    }
-});
+export const hsi = (...args) => new Color(hsi2rgb(...args));
+export const toHsi = c => to(c, c => rgb2hsi(c._rgb));

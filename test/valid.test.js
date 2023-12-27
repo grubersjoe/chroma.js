@@ -1,20 +1,12 @@
-require('es6-shim');
-const vows = require('vows');
-const assert = require('assert');
-const chroma = require('../index');
+import { isValidCmyk, isValidHex } from '../src/valid.js';
 
+// TODO: add way more tests for all color models
+describe('isValidHex()', () => {
+  test('"red" is valid', () => expect(isValidHex('red')).toBe(false));
+  test('"#fff" is valid', () => expect(isValidHex('#fff')).toBe(true));
+  test('"bread" is invalid hex', () => expect(isValidHex('bread')).toBe(false));
+});
 
-vows
-    .describe('Some tests for chroma.valid')
-
-    .addBatch({
-        'valid color': {
-            topic: chroma.valid('red'),
-            'is true'(topic) { return assert(topic); }
-        },
-        'invalid color': {
-            topic: chroma.valid('bread'),
-            'is false'(topic) { return assert(!topic); }
-        }
-    })
-    .export(module);
+describe('isValidCmyk()', () => {
+  test('"red" is invalid', () => expect(isValidCmyk('red')).toBe(false));
+});

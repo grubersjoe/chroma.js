@@ -1,3 +1,3 @@
-module.exports = (x, min=0, max=1) => {
-    return x < min ? min : x > max ? max : x;
+export function limit(x, min = 0, max = 1) {
+  return Math.min(Math.max(x, min), max);
 }

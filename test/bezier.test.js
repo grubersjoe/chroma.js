@@ -1,120 +1,45 @@
-require("es6-shim");
-const vows = require("vows");
-const assert = require("assert");
-const chroma = require("../index");
+import { bezier } from '../src/generator/bezier';
+import { scale } from '../src/generator/scale';
+import { toHex } from '../src/io/hex';
+import { named } from '../src/io/named';
 
-vows
-  .describe("Testing bezier interpolation")
+describe('bezier()', () => {
+  test('simple two color linear interpolation', () => {
+    const b = bezier(['white', 'black'].map(named));
+    expect(toHex(b(0))).toEqual('#ffffff');
+    expect(toHex(b(0.5))).toEqual('#777777');
+    expect(toHex(b(1))).toEqual('#000000');
+  });
 
-  .addBatch({
-    "simple two color linear interpolation": {
-      topic: {
-        f: chroma.bezier(["white", "black"]),
-      },
-      "starts from white"(topic) {
-        assert.equal(topic.f(0).hex(), "#ffffff");
-      },
-      "ends in black"(topic) {
-        assert.equal(topic.f(1).hex(), "#000000");
-      },
-      "center is grey"(topic) {
-        assert.equal(topic.f(0.5).hex(), "#777777");
-      },
-    },
+  test('three color quadratic bezier interpolation', () => {
+    const b = bezier(['white', 'red', 'black'].map(named));
+    expect(toHex(b(0))).toEqual('#ffffff');
+    expect(toHex(b(0.5))).toEqual('#c45c44');
+    expect(toHex(b(1))).toEqual('#000000');
+  });
 
-    "three color quadratic bezier interpolation": {
-      topic: {
-        f: chroma.bezier(["white", "red", "black"]),
-      },
-      "starts from white"(topic) {
-        assert.equal(topic.f(0).hex(), "#ffffff");
-      },
-      "ends in black"(topic) {
-        assert.equal(topic.f(1).hex(), "#000000");
-      },
-      "center is a greyish red"(topic) {
-        assert.equal(topic.f(0.5).hex(), "#c45c44");
-      },
-    },
+  test('four color cubic bezier interpolation', () => {
+    const b = bezier(['white', 'yellow', 'red', 'black'].map(named));
+    expect(toHex(b(0))).toEqual('#ffffff');
+    expect(toHex(b(0.25))).toEqual('#ffe085');
+    expect(toHex(b(0.5))).toEqual('#e69735');
+    expect(toHex(b(0.75))).toEqual('#914213');
+    expect(toHex(b(1))).toEqual('#000000');
+  });
 
-    "four color cubic bezier interpolation": {
-      topic: {
-        f: chroma.bezier(["white", "yellow", "red", "black"]),
-      },
-      "starts from white"(topic) {
-        assert.equal(topic.f(0).hex(), "#ffffff");
-      },
-      "ends in black"(topic) {
-        assert.equal(topic.f(1).hex(), "#000000");
-      },
-      "1st quarter"(topic) {
-        assert.equal(topic.f(0.25).hex(), "#ffe085");
-      },
-      center(topic) {
-        assert.equal(topic.f(0.5).hex(), "#e69735");
-      },
-      "3rd quarter"(topic) {
-        assert.equal(topic.f(0.75).hex(), "#914213");
-      },
-    },
+  test('five color diverging quadratic bezier interpolation', () => {
+    const b = bezier(['darkred', 'orange', 'snow', 'lightgreen', 'royalblue'].map(named));
+    expect(toHex(b(0))).toEqual('#8b0000');
+    expect(toHex(b(0.25))).toEqual('#dd8d49');
+    expect(toHex(b(0.5))).toEqual('#dfcb98');
+    expect(toHex(b(0.75))).toEqual('#a7c1bd');
+    expect(toHex(b(1))).toEqual('#4169e1');
+  });
 
-    "five color diverging quadratic bezier interpolation": {
-      topic: {
-        f: chroma.bezier([
-          "darkred",
-          "orange",
-          "snow",
-          "lightgreen",
-          "royalblue",
-        ]),
-      },
-      "starts from darkred"(topic) {
-        assert.equal(topic.f(0).hex(), "#8b0000");
-      },
-      "ends in royalblue"(topic) {
-        assert.equal(topic.f(1).hex(), "#4169e1");
-      },
-      "center is snow"(topic) {
-        assert.equal(topic.f(0.5).hex(), "#dfcb98");
-      },
-      "1st quarter"(topic) {
-        assert.equal(topic.f(0.25).hex(), "#dd8d49");
-      },
-      "3rd quarter"(topic) {
-        assert.equal(topic.f(0.75).hex(), "#a7c1bd");
-      },
-    },
+  test('using bezier in a chroma.scale', () => {
+    const b = bezier(['darkred', 'orange', 'snow', 'lightgreen', 'royalblue'].map(named));
+    const s = scale(b).domain([0, 1]);
 
-    "using bezier in a chroma.scale": {
-      topic: {
-        f: chroma
-          .scale(
-            chroma.bezier([
-              "darkred",
-              "orange",
-              "snow",
-              "lightgreen",
-              "royalblue",
-            ])
-          )
-          .domain([0, 1], 5)
-          .out("hex"),
-      },
-      "starts from darkred"(topic) {
-        assert.equal(topic.f(0), "#8b0000");
-      },
-      "ends in royalblue"(topic) {
-        assert.equal(topic.f(1), "#4169e1");
-      },
-      "center is snow"(topic) {
-        assert.equal(topic.f(0.5), "#dfcb98");
-      },
-      "1st quarter"(topic) {
-        assert.equal(topic.f(0.25), "#dd8d49");
-      },
-      "3rd quarter"(topic) {
-        assert.equal(topic.f(0.75), "#a7c1bd");
-      },
-    },
-  })
-  .export(module);
+    expect(toHex(s(0))).toEqual('#8b0000');
+  });
+});

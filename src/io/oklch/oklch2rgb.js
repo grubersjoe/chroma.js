@@ -1,13 +1,15 @@
-const { unpack } = require('../../utils');
-const lch2lab = require('../lch/lch2lab');
-const oklab2rgb = require('../oklab/oklab2rgb');
+import { unpack } from '../../utils/unpack';
+import { lch2lab } from '../lch/lch2lab';
+import { oklab2rgb } from '../oklab/oklab2rgb';
+import { assertArgsLength } from '../validate';
 
-const oklch2rgb = (...args) => {
-    args = unpack(args, 'lch');
-    const [l, c, h] = args;
-    const [L, a, b_] = lch2lab(l, c, h);
-    const [r, g, b] = oklab2rgb(L, a, b_);
-    return [r, g, b, args.length > 3 ? args[3] : 1];
+export const oklch2rgb = (...args) => {
+  args = unpack(args, 'lch');
+  assertArgsLength(3, args);
+
+  const [l, c, h] = args;
+  const [L, a, b_] = lch2lab(l, c, h);
+  const [r, g, b] = oklab2rgb(L, a, b_);
+
+  return [r, g, b, args.length > 3 ? args[3] : 1];
 };
-
-module.exports = oklch2rgb;

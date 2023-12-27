@@ -1,69 +1,80 @@
-const vows = require('vows')
-const assert = require('assert');
-require('es6-shim');
+import { get, lch, rgb } from '../index';
+import { average } from '../src/generator/average';
+import { mix } from '../src/generator/mix';
+import { css } from '../src/io/css';
+import { hex, toHex } from '../src/io/hex';
+import { named } from '../src/io/named';
+import { toRgba } from '../src/io/rgb';
 
-const chroma = require('../index');
+describe('average', () => {
+  test('average colors', () => {
+    const c = ['red', 'blue'].map(named);
+    expect(average(c)).toEqual(mix(...c));
+  });
 
-const colors = [[125,133,127], [131,127,134], [138,121,141], [144,114,147], [149,107,153],
-    [165,83,170], [160,92,164], [170,73,175], [175,62,180], [155,100,159]];
+  test('three colors', () => {
+    const a = average(['blue', 'red', 'white'].map(named), 'rgb');
+    expect(toHex(a)).toEqual('#aa55aa');
+  });
 
-vows
-    .describe('Testing color averaging modes')
-    .addBatch({
-        'avg some colors': {
-            topic: ['red', 'blue'],
-            'is #5a0000'(topic) {
-                assert.equal(chroma.average(topic).hex(), chroma.mix(topic[0], topic[1]).hex())
-            }
-        },
-        'three colors': {
-            topic: chroma.average(['blue', 'red', 'white'], 'rgb'),
-            'is #5a0000'(topic) {
-                assert.equal(topic.hex(), '#aa55aa')
-            }
-        },
-        'alpha avg': {
-           topic: chroma.average(['rgba(0,0,0,0)', 'red'], 'rgb'),
-           'is #5a0000'(topic) { assert.deepEqual(topic.rgba(), [128, 0, 0, 0.5]) },
-           'is #5a0000-2'(topic) { assert.deepEqual(topic.rgba(false), [127.5, 0, 0, 0.5]) }
-       },
-        'average in lab': {
-            topic: chroma.average(['blue', 'red', 'white'], 'lab'),
-            'is #5a0000'(topic) { assert.equal(topic.hex(), '#e26daf') }
-        },
-        'average h in lch': {
-            topic: chroma.average([chroma.lch(50, 50, 0), chroma.lch(50, 50, 90)], 'lch').get('lch.h'),
-            'is approximately 45'(topic) { assert.equal(Math.round(topic), 45) }
-        },
-        'average in hsl of same colors': {
-            topic: chroma.average(['#02c03a', '#02c03a'], 'hsl'),
-            'is same'(topic) { assert.equal(topic.hex(), '#02c03a') }
-        },
-        'average same color': {
-            topic: chroma.average(["#02c03a", "#02c03a"],'hsl'),
-            'is #02c03a'(topic) { assert.equal(topic.hex(), '#02c03a') }
-        },
-        'lrgb avergage': {
-            topic: chroma.average(colors, 'lrgb'),
-            'is ???'(topic) { assert.equal(topic.hex(), '#98689c') }
-        },
-        'three colors, weighted rgb average': {
-            topic: chroma.average(['blue', 'red', 'white'], 'rgb', [1,1,2]),
-            'is #bf80bf'(topic) {
-                assert.equal(topic.hex(), '#bf80bf')
-            }
-        },
-        'three colors, weighted lrgb average': {
-            topic: chroma.average(['blue', 'red', 'white'], 'lrgb', [1,3,2]),
-            'is #e993b4'(topic) {
-                assert.equal(topic.hex(), '#e993b4')
-            }
-        },
-        'three colors, weighted hsl average': {
-            topic: chroma.average(['blue', 'red', 'white'], 'hsl', [0.25,1,0.5]),
-            'is #e58263'(topic) {
-                assert.equal(topic.hex(), '#e58263')
-            }
-        },
-    })
-    .export(module)
+  test('alpha average', () => {
+    const a = average([css('rgba(0 0 0 0)'), named('red')], 'rgb');
+    expect(toRgba(a)).toEqual([128, 0, 0, 0.5]);
+    expect(toRgba(a, false)).toEqual([127.5, 0, 0, 0.5]);
+  });
+
+  test('average in lab', () => {
+    const a = average(['blue', 'red', 'white'].map(named), 'lab');
+    expect(toHex(a)).toEqual('#e26daf');
+  });
+
+  test('average h in lch', () => {
+    const a = average([lch(50, 50, 0), lch(50, 50, 90)], 'lch');
+    expect(get(a, 'lch.h')).toBeCloseTo(45, 4);
+  });
+
+  test('average of same colors', () => {
+    const c = hex('#e3c329');
+    const a = average([c, c]);
+    expect(a).toEqual(c);
+  });
+
+  test('average in hsl of same colors', () => {
+    const c = hex('#02c03a');
+    const a = average([c, c], 'hsl');
+    expect(a).toEqual(c);
+  });
+
+  test('lrgb average', () => {
+    const c = [
+      [125, 133, 127],
+      [131, 127, 134],
+      [138, 121, 141],
+      [144, 114, 147],
+      [149, 107, 153],
+      [165, 83, 170],
+      [160, 92, 164],
+      [170, 73, 175],
+      [175, 62, 180],
+      [155, 100, 159],
+    ].map(c => rgb(c));
+
+    const a = average(c, 'lrgb');
+    expect(toHex(a)).toEqual('#98689c');
+  });
+
+  test('three colors, weighted rgb average', () => {
+    const a = average(['blue', 'red', 'white'].map(named), 'rgb', [1, 1, 2]);
+    expect(toHex(a)).toEqual('#bf80bf');
+  });
+
+  test('three colors, weighted lrgb average', () => {
+    const a = average(['blue', 'red', 'white'].map(named), 'lrgb', [1, 3, 2]);
+    expect(toHex(a)).toEqual('#e993b4');
+  });
+
+  test('three colors, weighted hsl average', () => {
+    const a = average(['blue', 'red', 'white'].map(named), 'hsl', [0.25, 1, 0.5]);
+    expect(toHex(a)).toEqual('#e58263');
+  });
+});

@@ -1,26 +1,7 @@
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const input = require('../input');
-const {type} = require('../../utils');
+import { Color } from '../../color';
+import { to } from '../to';
+import { css2rgb } from './css2rgb';
+import { rgb2css } from './rgb2css.js';
 
-const rgb2css = require('./rgb2css');
-const css2rgb = require('./css2rgb');
-
-Color.prototype.css = function(mode) {
-    return rgb2css(this._rgb, mode);
-};
-
-chroma.css = (...args) => new Color(...args, 'css');
-
-input.format.css = css2rgb;
-
-input.autodetect.push({
-    p: 5,
-    test: (h, ...rest) => {
-        if (!rest.length && type(h) === 'string' && css2rgb.test(h)) {
-            return 'css';
-        }
-    }
-})
-
-
+export const css = arg => new Color(css2rgb(arg));
+export const toCss = (c, mode = undefined) => to(c, c => rgb2css(c._rgb, mode));

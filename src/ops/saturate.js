@@ -1,16 +1,12 @@
-require('../io/lch');
-const Color = require('../Color');
-const LAB_CONSTANTS = require('../io/lab/lab-constants');
+import { LAB_CONSTANTS } from '../io/lab/lab-constants';
+import { lch } from '../io/lch';
+import { alpha } from './alpha';
 
-Color.prototype.saturate = function(amount=1) {
-	const me = this;
-	const lch = me.lch();
-	lch[1] += LAB_CONSTANTS.Kn * amount;
-	if (lch[1] < 0) lch[1] = 0;
-	return new Color(lch, 'lch').alpha(me.alpha(), true);
-}
+export const saturate = (color, amount = 1) => {
+  const l = color.lch();
+  l[1] += LAB_CONSTANTS.Kn * amount;
+  if (l[1] < 0) l[1] = 0;
+  return alpha(lch(l), alpha(color), true);
+};
 
-Color.prototype.desaturate = function(amount=1) {
-	return this.saturate(-amount);
-}
-
+export const desaturate = (color, amount = 1) => saturate(color, -amount);

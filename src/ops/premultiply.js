@@ -1,12 +1,11 @@
-const Color = require('../Color');
+import { rgb } from '../io/rgb';
 
-Color.prototype.premultiply = function(mutate=false) {
-	const rgb = this._rgb;
-	const a = rgb[3];
-	if (mutate) {
-		this._rgb = [rgb[0]*a, rgb[1]*a, rgb[2]*a, a];
-		return this;
-	} else {
-		return new Color([rgb[0]*a, rgb[1]*a, rgb[2]*a, a], 'rgb');
-	}
-}
+export const premultiply = (color, mutate = false) => {
+  const _rgb = color._rgb;
+  const a = _rgb[3];
+  if (mutate) {
+    color._rgb = [_rgb[0] * a, _rgb[1] * a, _rgb[2] * a, a];
+    return color;
+  }
+  return rgb([_rgb[0] * a, _rgb[1] * a, _rgb[2] * a, a]);
+};

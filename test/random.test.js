@@ -1,15 +1,8 @@
-require('es6-shim');
-const vows = require('vows');
-const assert = require('assert');
-const chroma = require('../index');
+import { random } from '../src/generator/random';
+import { toHex } from '../src/io/hex';
 
-
-vows
-    .describe('Some tests for random colors')
-
-    .addBatch({
-
-        'random colors': {
-            topic: chroma.random(),
-            'valid hex code'(topic) { return assert(/^#[0-9a-f]{6}$/i.test(topic.hex())); }
-        }}).export(module);
+describe('random()', () => {
+  test('returns random color', () => {
+    expect(toHex(random())).toMatch(/^#[0-9a-f]{6}$/);
+  });
+});

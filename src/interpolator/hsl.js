@@ -1,11 +1,5 @@
-require('../io/hsl');
-const interpolate_hsx = require('./_hsx');
+import { interpolateHsx } from './_hsx';
 
-const hsl = (col1, col2, f) => {
-	return interpolate_hsx(col1, col2, f, 'hsl');
-}
-
-// register interpolator
-require('./index').hsl = hsl;
-
-module.exports = hsl;
+export const hsl = (col1, col2, f) => {
+  return interpolateHsx(col1, col2, f, 'hsl');
+};

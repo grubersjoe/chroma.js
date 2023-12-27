@@ -1,17 +1,11 @@
-require('../io/lab');
-const Color = require('../Color');
-const LAB_CONSTANTS = require('../io/lab/lab-constants');
+import { lab } from '../io/lab';
+import { LAB_CONSTANTS } from '../io/lab/lab-constants';
+import { alpha } from './alpha';
 
-Color.prototype.darken = function(amount=1) {
-	const me = this;
-	const lab = me.lab();
-	lab[0] -= LAB_CONSTANTS.Kn * amount;
-	return new Color(lab, 'lab').alpha(me.alpha(), true);
-}
+export const darken = (color, amount = 1) => {
+  const l = color.lab();
+  l[0] -= LAB_CONSTANTS.Kn * amount;
+  return alpha(lab(l), alpha(color), true);
+};
 
-Color.prototype.brighten = function(amount=1) {
-	return this.darken(-amount);
-}
-
-Color.prototype.darker = Color.prototype.darken;
-Color.prototype.brighter = Color.prototype.brighten;
+export const brighten = (color, amount = 1) => darken(color, -amount);

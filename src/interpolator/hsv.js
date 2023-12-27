@@ -1,11 +1,5 @@
-require('../io/hsv');
-const interpolate_hsx = require('./_hsx');
+import { interpolateHsx } from './_hsx';
 
-const hsv = (col1, col2, f) => {
-	return interpolate_hsx(col1, col2, f, 'hsv');
-}
-
-// register interpolator
-require('./index').hsv = hsv;
-
-module.exports = hsv;
+export const hsv = (col1, col2, f) => {
+  return interpolateHsx(col1, col2, f, 'hsv');
+};

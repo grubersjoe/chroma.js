@@ -1,9 +1,11 @@
-const {unpack} = require('../../utils');
-const lch2rgb = require('./lch2rgb');
+import { unpack } from '../../utils/unpack';
+import { lch2rgb } from './lch2rgb';
 
-const hcl2rgb = (...args) => {
-    const hcl = unpack(args, 'hcl').reverse();
-    return lch2rgb(...hcl);
-}
+export const hcl2rgb = (...args) => {
+  args = unpack(args, 'hcl').reverse();
+  if (args.length !== 3) {
+    throw new Error(`invalid arguments: ${args}`);
+  }
 
-module.exports = hcl2rgb;
+  return lch2rgb(...args);
+};

@@ -1,72 +1,125 @@
-const chroma = require('./src/chroma');
+import { analyze, limits } from './src/analyze';
+import { colorbrewer } from './src/colors/colorbrewer';
+import { w3cx11 as colors } from './src/colors/w3cx11';
+import { contrast } from './src/contrast';
+import { deltaE } from './src/delta-e';
+import { distance } from './src/distance';
+import { average } from './src/generator/average';
+import { bezier } from './src/generator/bezier';
+import { blend } from './src/generator/blend';
+import { cubehelix } from './src/generator/cubehelix';
+import { mix } from './src/generator/mix';
+import { random } from './src/generator/random';
+import { scale } from './src/generator/scale';
+import { cmyk, toCmyk } from './src/io/cmyk';
+import { css, toCss } from './src/io/css';
+import { gl, toGl } from './src/io/gl';
+import { hsl, toHsl } from './src/io/hsl';
+import { hsv, toHsv } from './src/io/hsv';
+import { lab, toLab } from './src/io/lab';
+import { hcl, lch, toHcl, toLch } from './src/io/lch';
+import { named, toName } from './src/io/named';
+import { oklab, toOklab } from './src/io/oklab';
+import { oklch, toOklch } from './src/io/oklch';
+import { rgb, toRgb, toRgba } from './src/io/rgb';
+import { temp, toTemp } from './src/io/temp';
+import { alpha } from './src/ops/alpha.js';
+import { clipped } from './src/ops/clipped.js';
+import { brighten, darken } from './src/ops/darken.js';
+import { get } from './src/ops/get.js';
+import { luminance } from './src/ops/luminance.js';
+import { premultiply } from './src/ops/premultiply.js';
+import { desaturate, saturate } from './src/ops/saturate.js';
+import { set } from './src/ops/set.js';
+import { scales } from './src/scales.js';
+import {
+  isValidBrewer,
+  isValidCmyk,
+  isValidCss,
+  isValidGl,
+  isValidHcg,
+  isValidHex,
+  isValidHsi,
+  isValidHsl,
+  isValidHsv,
+  isValidLab,
+  isValidLch,
+  isValidName,
+  isValidNum,
+  isValidOklab,
+  isValidOklch,
+  isValidRgb,
+  isValidTemp,
+} from './src/valid';
 
-// feel free to comment out anything to rollup
-// a smaller chroma.js built
-
-// io --> convert colors
-require('./src/io/cmyk');
-require('./src/io/css');
-require('./src/io/gl');
-require('./src/io/hcg');
-require('./src/io/hex');
-require('./src/io/hsi');
-require('./src/io/hsl');
-require('./src/io/hsv');
-require('./src/io/lab');
-require('./src/io/lch');
-require('./src/io/named');
-require('./src/io/num');
-require('./src/io/rgb');
-require('./src/io/temp');
-require('./src/io/oklab');
-require('./src/io/oklch');
-
-// operators --> modify existing Colors
-require('./src/ops/alpha');
-require('./src/ops/clipped');
-require('./src/ops/darken');
-require('./src/ops/get');
-require('./src/ops/luminance');
-require('./src/ops/mix');
-require('./src/ops/premultiply');
-require('./src/ops/saturate');
-require('./src/ops/set');
-
-// interpolators
-require('./src/interpolator/rgb');
-require('./src/interpolator/lrgb');
-require('./src/interpolator/lab');
-require('./src/interpolator/lch');
-require('./src/interpolator/num');
-require('./src/interpolator/hcg');
-require('./src/interpolator/hsi');
-require('./src/interpolator/hsl');
-require('./src/interpolator/hsv');
-require('./src/interpolator/oklab');
-require('./src/interpolator/oklch');
-
-// generators -- > create new colors
-chroma.average = require('./src/generator/average');
-chroma.bezier = require('./src/generator/bezier');
-chroma.blend = require('./src/generator/blend');
-chroma.cubehelix = require('./src/generator/cubehelix');
-chroma.mix = chroma.interpolate = require('./src/generator/mix');
-chroma.random = require('./src/generator/random');
-chroma.scale = require('./src/generator/scale');
-
-// other utility methods
-chroma.analyze = require('./src/utils/analyze').analyze;
-chroma.contrast = require('./src/utils/contrast');
-chroma.deltaE = require('./src/utils/delta-e');
-chroma.distance = require('./src/utils/distance');
-chroma.limits = require('./src/utils/analyze').limits;
-chroma.valid = require('./src/utils/valid');
-
-// scale
-chroma.scales = require('./src/utils/scales');
-
-// colors
-chroma.colors = require('./src/colors/w3cx11');
-chroma.brewer = require('./src/colors/colorbrewer');
-
-module.exports = chroma;
+export {
+  alpha,
+  analyze,
+  average,
+  bezier,
+  blend,
+  brighten,
+  clipped,
+  cmyk,
+  colorbrewer,
+  colors,
+  contrast,
+  css,
+  cubehelix,
+  darken,
+  deltaE,
+  desaturate,
+  distance,
+  get,
+  gl,
+  hcl,
+  hsl,
+  hsv,
+  isValidBrewer,
+  isValidCmyk,
+  isValidCss,
+  isValidGl,
+  isValidHcg,
+  isValidHex,
+  isValidHsi,
+  isValidHsl,
+  isValidHsv,
+  isValidLab,
+  isValidLch,
+  isValidName,
+  isValidNum,
+  isValidOklab,
+  isValidOklch,
+  isValidRgb,
+  isValidTemp,
+  lab,
+  lch,
+  limits,
+  luminance,
+  mix,
+  named,
+  oklab,
+  oklch,
+  premultiply,
+  random,
+  rgb,
+  saturate,
+  scale,
+  scales,
+  set,
+  temp,
+  toCmyk,
+  toCss,
+  toGl,
+  toHcl,
+  toHsl,
+  toHsv,
+  toLab,
+  toLch,
+  toName,
+  toOklab,
+  toOklch,
+  toRgb,
+  toRgba,
+  toTemp,
+};

@@ -1,24 +1,7 @@
-const {unpack, type} = require('../../utils');
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const input = require('../input');
+import { Color } from '../../color';
+import { to } from '../to';
+import { hsl2rgb } from './hsl2rgb';
+import { rgb2hsl } from './rgb2hsl.js';
 
-const rgb2hsl = require('./rgb2hsl');
-
-Color.prototype.hsl = function() {
-    return rgb2hsl(this._rgb);
-};
-
-chroma.hsl = (...args) => new Color(...args, 'hsl');
-
-input.format.hsl = require('./hsl2rgb');
-
-input.autodetect.push({
-    p: 2,
-    test: (...args) => {
-        args = unpack(args, 'hsl');
-        if (type(args) === 'array' && args.length === 3) {
-            return 'hsl';
-        }
-    }
-});
+export const hsl = (...args) => new Color(hsl2rgb(...args));
+export const toHsl = c => to(c, c => rgb2hsl(c._rgb));

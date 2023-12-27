@@ -1,12 +1,7 @@
-require('../io/lch');
-const interpolate_hsx = require('./_hsx');
+import { interpolateHsx } from './_hsx';
 
-const lch = (col1, col2, f) => {
-	return interpolate_hsx(col1, col2, f, 'lch');
-}
+export const lch = (col1, col2, f) => {
+  return interpolateHsx(col1, col2, f, 'lch');
+};
 
-// register interpolator
-require('./index').lch = lch;
-require('./index').hcl = lch;
-
-module.exports = lch;
+export const hcl = lch;

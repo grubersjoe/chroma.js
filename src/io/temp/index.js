@@ -1,21 +1,7 @@
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const input = require('../input');
+import { Color } from '../../color';
+import { to } from '../to';
+import { rgb2temp } from './rgb2temp.js';
+import { temp2rgb } from './temp2rgb';
 
-const rgb2temperature = require('./rgb2temperature');
-
-Color.prototype.temp =
-Color.prototype.kelvin =
-Color.prototype.temperature = function() {
-    return rgb2temperature(this._rgb);
-};
-
-chroma.temp =
-chroma.kelvin =
-chroma.temperature = (...args) => new Color(...args, 'temp');
-
-input.format.temp =
-input.format.kelvin =
-input.format.temperature = require('./temperature2rgb');
-
-
+export const temp = arg => new Color(temp2rgb(arg));
+export const toTemp = c => to(c, c => rgb2temp(c._rgb));

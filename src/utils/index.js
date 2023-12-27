@@ -1,16 +1,4 @@
-const PI = Math.PI;
-
-module.exports = {
-	clip_rgb: require('./clip_rgb'),
-	limit: require('./limit'),
-	type: require('./type'),
-	unpack: require('./unpack'),
-	last: require('./last'),
-	PI: PI,
-	TWOPI: PI*2,
-	PITHIRD: PI/3,
-	DEG2RAD: PI / 180,
-	RAD2DEG: 180 / PI
-}
-
-
+export const TWOPI = Math.PI * 2;
+export const PITHIRD = Math.PI / 3;
+export const DEG2RAD = Math.PI / 180;
+export const RAD2DEG = 180 / Math.PI;

@@ -1,13 +1,12 @@
-const Color = require('../Color');
-const {type} = require('../utils');
+import { rgb } from '../io/rgb';
 
-Color.prototype.alpha = function(a, mutate=false) {
-    if (a !== undefined && type(a) === 'number') {
-        if (mutate) {
-            this._rgb[3] = a;
-            return this;
-        }
-        return new Color([this._rgb[0], this._rgb[1], this._rgb[2], a], 'rgb');
+export const alpha = function (color, alpha = undefined, mutate = false) {
+  if (alpha !== undefined && typeof alpha === 'number') {
+    if (mutate) {
+      color._rgb[3] = alpha;
+      return color;
     }
-    return this._rgb[3];
-}
+    return rgb([color._rgb[0], color._rgb[1], color._rgb[2], alpha]);
+  }
+  return color._rgb[3];
+};

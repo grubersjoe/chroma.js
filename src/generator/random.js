@@ -1,12 +1,13 @@
-const Color = require('../Color');
+import { hex } from '../io/hex';
+
 const digits = '0123456789abcdef';
 
-const {floor,random} = Math;
+const { floor } = Math;
 
-module.exports = () => {
-    let code = '#';
-    for (let i=0; i<6; i++) {
-        code += digits.charAt(floor(random() * 16));
-    }
-    return new Color(code, 'hex');
-}
+export const random = () => {
+  let code = '#';
+  for (let i = 0; i < 6; i++) {
+    code += digits.charAt(floor(Math.random() * 16));
+  }
+  return hex(code);
+};

@@ -1,24 +1,7 @@
-const {unpack, type} = require('../../utils');
-const chroma = require('../../chroma');
-const Color = require('../../Color');
-const input = require('../input');
+import { Color } from '../../color';
+import { to } from '../to';
+import { lab2rgb } from './lab2rgb';
+import { rgb2lab } from './rgb2lab.js';
 
-const rgb2lab = require('./rgb2lab');
-
-Color.prototype.lab = function() {
-    return rgb2lab(this._rgb);
-};
-
-chroma.lab = (...args) => new Color(...args, 'lab');
-
-input.format.lab = require('./lab2rgb');
-
-input.autodetect.push({
-    p: 2,
-    test: (...args) => {
-        args = unpack(args, 'lab');
-        if (type(args) === 'array' && args.length === 3) {
-            return 'lab';
-        }
-    }
-});
+export const lab = (...args) => new Color(lab2rgb(...args));
+export const toLab = c => to(c, c => rgb2lab(c._rgb));
