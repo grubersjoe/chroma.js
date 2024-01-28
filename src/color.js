@@ -9,8 +9,8 @@ export class Color {
     this._rgb = clipRgb(rgb);
 
     // add alpha channel
-    if (this._rgb.length === 3) {
-      this._rgb.push(1);
+    if (this._rgb[3] === undefined) {
+      this._rgb[3] = 1;
     }
   }
 

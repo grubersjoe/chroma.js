@@ -41,5 +41,9 @@ describe('bezier()', () => {
     const s = scale(b).domain([0, 1]);
 
     expect(toHex(s(0))).toEqual('#8b0000');
+    expect(toHex(s(0.25))).toEqual('#dd8d49');
+    expect(toHex(s(0.5))).toEqual('#dfcb98');
+    expect(toHex(s(0.75))).toEqual('#a7c1bd');
+    expect(toHex(s(1))).toEqual('#4169e1');
   });
 });

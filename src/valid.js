@@ -2,7 +2,7 @@ import { brewer } from './io/brewer';
 import { cmyk } from './io/cmyk';
 import { css } from './io/css';
 import { gl } from './io/gl';
-import { hcg } from './io/hcg';
+import { hcv } from './io/hcv';
 import { hex } from './io/hex';
 import { hsi } from './io/hsi';
 import { hsl } from './io/hsl';
@@ -48,9 +48,9 @@ export function isValidGl(arg) {
   }
 }
 
-export function isValidHcg(arg) {
+export function isValidHcv(arg) {
   try {
-    return Boolean(hcg(arg));
+    return Boolean(hcv(arg));
   } catch {
     return false;
   }

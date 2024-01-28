@@ -8,10 +8,11 @@ import { rgb, toRgb } from '../src/io/rgb';
 import { alpha } from '../src/ops/alpha';
 
 describe('color constructors', () => {
-  test('named colors', () => {
+  test('named()', () => {
     const c = named('red');
     expect(toHex(c)).toEqual('#ff0000');
     expect(toRgb(c)).toEqual([255, 0, 0]);
+    expect(() => named('invalid')).toThrow(`invalid argument "invalid"`);
   });
 
   test('hex colors', () => {

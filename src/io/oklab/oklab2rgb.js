@@ -1,5 +1,5 @@
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 const { pow, sign } = Math;
 
@@ -10,7 +10,7 @@ const { pow, sign } = Math;
  */
 export const oklab2rgb = (...args) => {
   args = unpack(args, 'lab');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   const [L, a, b] = args;
   const l = pow(L + 0.3963377774 * a + 0.2158037573 * b, 3);

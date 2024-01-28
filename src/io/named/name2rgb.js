@@ -6,5 +6,5 @@ export const name2rgb = name => {
   if (w3cx11[name]) {
     return hex2rgb(w3cx11[name]);
   }
-  throw new Error(`invalid argument ${name}`);
+  throw new Error(`invalid argument "${name}"`);
 };

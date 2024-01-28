@@ -6,5 +6,5 @@ export const brewer = name => {
   if (colorbrewer[name]) {
     return colorbrewer[name].map(hex);
   }
-  throw new Error(`invalid argument: ${name}`);
+  throw new Error(`invalid argument: "${name}"`);
 };

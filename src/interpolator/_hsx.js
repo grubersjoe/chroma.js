@@ -1,4 +1,4 @@
-import { toHcg } from '../io/hcg/index.js';
+import { toHcv } from '../io/hcv/index.js';
 import { toHsi } from '../io/hsi/index.js';
 import { toHsl } from '../io/hsl/index.js';
 import { toHsv } from '../io/hsv/index.js';
@@ -14,9 +14,9 @@ export const interpolateHsx = (col1, col2, f, mode) => {
   } else if (mode === 'hsv') {
     xyz0 = toHsv(col1);
     xyz1 = toHsv(col2);
-  } else if (mode === 'hcg') {
-    xyz0 = toHcg(col1);
-    xyz1 = toHcg(col2);
+  } else if (mode === 'hcv') {
+    xyz0 = toHcv(col1);
+    xyz1 = toHcv(col2);
   } else if (mode === 'hsi') {
     xyz0 = toHsi(col1);
     xyz1 = toHsi(col2);

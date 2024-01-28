@@ -1,11 +1,11 @@
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 const { round } = Math;
 
 export const hsl2rgb = (...args) => {
   args = unpack(args, 'hsl');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   const [h, s, l] = args;
   let r, g, b;

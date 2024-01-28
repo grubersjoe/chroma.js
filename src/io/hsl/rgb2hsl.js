@@ -7,11 +7,11 @@
  * - rgb2hsl({r,g,b,a})
  */
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 export const rgb2hsl = (...args) => {
   args = unpack(args, 'rgba');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
   let [r, g, b] = args;
 
   r /= 255;

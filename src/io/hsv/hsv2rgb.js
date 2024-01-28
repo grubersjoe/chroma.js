@@ -1,11 +1,11 @@
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 const { floor } = Math;
 
 export const hsv2rgb = (...args) => {
   args = unpack(args, 'hsv');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   let [h, s, v] = args;
   let r, g, b;

@@ -1,5 +1,5 @@
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 import { LAB_CONSTANTS } from './lab-constants';
 
 const { pow } = Math;
@@ -11,7 +11,7 @@ const { pow } = Math;
  */
 export const lab2rgb = (...args) => {
   args = unpack(args, 'lab');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   const [l, a, b] = args;
   let x, y, z, r, g, b_;

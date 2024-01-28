@@ -17,7 +17,7 @@ const { round } = Math;
  */
 export const css2rgb = css => {
   if (!css2rgb.test(css)) {
-    throw new Error(`invalid argument: ${css}`);
+    throw new Error(`invalid argument: "${css}"`);
   }
 
   css = css.toLowerCase().trim();
@@ -29,7 +29,6 @@ export const css2rgb = css => {
     for (let i = 0; i < 3; i++) {
       rgb[i] = +rgb[i];
     }
-    rgb[3] = 1; // default alpha
     return rgb;
   }
 
@@ -48,7 +47,6 @@ export const css2rgb = css => {
     for (let i = 0; i < 3; i++) {
       rgb[i] = round(rgb[i] * 2.55);
     }
-    rgb[3] = 1; // default alpha
     return rgb;
   }
 
@@ -58,7 +56,6 @@ export const css2rgb = css => {
     for (let i = 0; i < 3; i++) {
       rgb[i] = round(rgb[i] * 2.55);
     }
-    rgb[3] = +rgb[3];
     return rgb;
   }
 
@@ -67,9 +64,7 @@ export const css2rgb = css => {
     const hsl = m.slice(1, 4);
     hsl[1] *= 0.01;
     hsl[2] *= 0.01;
-    const rgb = hsl2rgb(hsl);
-    rgb[3] = 1;
-    return rgb;
+    return hsl2rgb(hsl);
   }
 
   // hsla(0,100%,50%,0.5)
@@ -78,7 +73,7 @@ export const css2rgb = css => {
     hsl[1] *= 0.01;
     hsl[2] *= 0.01;
     const rgb = hsl2rgb(hsl);
-    rgb[3] = +m[4]; // default alpha = 1
+    rgb[3] = m[4]; // default alpha = 1
     return rgb;
   }
 };

@@ -1,4 +1,4 @@
-import { hcg } from './hcg';
+import { hcv } from './hcv';
 import { hsi } from './hsi';
 import { hsl } from './hsl';
 import { hsv } from './hsv';
@@ -11,7 +11,7 @@ import { oklch } from './oklch';
 import { rgb } from './rgb';
 
 export const interpolator = {
-  hcg,
+  hcv,
   hcl,
   hsi,
   hsl,

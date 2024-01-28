@@ -1,7 +1,7 @@
 import { PITHIRD, TWOPI } from '../../utils';
 import { limit } from '../../utils/limit';
 import { unpack } from '../../utils/unpack';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 const { cos } = Math;
 
@@ -12,7 +12,7 @@ const { cos } = Math;
  */
 export const hsi2rgb = (...args) => {
   args = unpack(args, 'hsi');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   let [h, s, i] = args;
   let r, g, b;

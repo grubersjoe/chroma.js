@@ -1,6 +1,6 @@
 import { css, toCss } from './css';
 import { gl, toGl } from './gl';
-import { hcg, toHcg } from './hcg';
+import { hcv, toHcv } from './hcv';
 import { hex, toHex } from './hex';
 import { hsi, toHsi } from './hsi';
 import { hsl, toHsl } from './hsl';
@@ -20,8 +20,8 @@ export const fromMode = (args, mode) => {
       return css(args);
     case 'gl':
       return gl(args);
-    case 'hcg':
-      return hcg(args);
+    case 'hcv':
+      return hcv(args);
     case 'hex':
       return hex(args);
     case 'hsi':
@@ -62,8 +62,8 @@ export const toMode = (color, mode) => {
       return toCss(color);
     case 'gl':
       return toGl(color);
-    case 'hcg':
-      return toHcg(color);
+    case 'hcv':
+      return toHcv(color);
     case 'hex':
       return toHex(color);
     case 'hsi':

@@ -74,12 +74,6 @@ describe('alpha()', () => {
     test('color is red', () => expect(toName(c)).toEqual('red'));
     test('alpha is 25%', () => expect(alpha(c)).toEqual(0.25));
   });
-
-  hex('#ff0000')
-  toHex(c) -> '#ff000'
-
-
-
   describe('constructing laba color', () => {
     const c = lab(53.24079414130722, 80.09245959641109, 67.20319651585301, 0.25);
     test('color is red', () => expect(toName(c)).toEqual('red'));

@@ -323,16 +323,6 @@ export const scale = input => {
   return f;
 };
 
-const validateInput = input => {
-  if (typeof input === 'function') {
-    return;
-  }
-
-  if (!Array.isArray(input) || input.length === 0 || !input.every(isColor)) {
-    throw new Error('input must be a single Color object or a list of them');
-  }
-};
-
 function __range__(left, right, inclusive) {
   let range = [];
   let ascending = left < right;

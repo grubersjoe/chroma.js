@@ -1,11 +1,11 @@
 import { unpack } from '../../utils/unpack';
 import { lch2lab } from '../lch/lch2lab';
 import { oklab2rgb } from '../oklab/oklab2rgb';
-import { assertArgsLength } from '../validate';
+import { assertValidArgs } from '../validate';
 
 export const oklch2rgb = (...args) => {
   args = unpack(args, 'lch');
-  assertArgsLength(3, args);
+  assertValidArgs(args, 3);
 
   const [l, c, h] = args;
   const [L, a, b_] = lch2lab(l, c, h);
