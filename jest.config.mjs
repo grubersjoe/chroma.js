@@ -4,8 +4,8 @@
 /** @type {import('jest').Config} */
 const config = {
   // collectCoverage: true,
-  // coverageDirectory: "test/coverage",
-  testMatch: ["<rootDir>/test/*.test.js"],
+  coverageDirectory: 'test/coverage',
+  testMatch: ['<rootDir>/test/*.test.js'],
 };
 
 export default config;
