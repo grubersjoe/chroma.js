@@ -12,12 +12,11 @@ describe('hcv2rgb()', () => {
     ['blue', [240, 1, 0], [0, 0, 255, 1]],
     ['magenta', [300, 1, 0], [255, 0, 255, 1]],
     ['red_again', [360, 1, 0], [255, 0, 0, 1]],
-
   ];
 
   test.each(tests)('%s', (name, input, expected) => {
     const [h, c, v] = input;
-    expect(hcv2rgb(input)).toEqual(expected);
-    expect(hcv2rgb({ h, c, v })).toEqual(expected);
+    expect(hcv2rgb(input)).toStrictEqual(expected);
+    expect(hcv2rgb({ h, c, v })).toStrictEqual(expected);
   });
 });

@@ -19,55 +19,55 @@ describe('converters', () => {
     const c = hex(input);
 
     test(`${input} - to cmyk and back`, () => {
-      expect(toHex(cmyk(toCmyk(c)))).toEqual(input);
+      expect(toHex(cmyk(toCmyk(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to css and back`, () => {
-      expect(toHex(css(toCss(c)))).toEqual(input);
+      expect(toHex(css(toCss(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to gl and back`, () => {
-      expect(toHex(gl(toGl(c)))).toEqual(input);
+      expect(toHex(gl(toGl(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to hsi and back`, () => {
-      expect(toHex(hsi(toHsi(c)))).toEqual(input);
+      expect(toHex(hsi(toHsi(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to hsl and back`, () => {
-      expect(toHex(hsl(toHsl(c)))).toEqual(input);
+      expect(toHex(hsl(toHsl(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to hsv and back`, () => {
-      expect(toHex(hsv(toHsv(c)))).toEqual(input);
+      expect(toHex(hsv(toHsv(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to lab and back`, () => {
-      expect(toHex(lab(toLab(c)))).toEqual(input);
+      expect(toHex(lab(toLab(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to lch and back`, () => {
-      expect(toHex(lch(toLch(c)))).toEqual(input);
+      expect(toHex(lch(toLch(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to name and back`, () => {
-      expect(toHex(named(toName(c)))).toEqual(input);
+      expect(toHex(named(toName(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to num and back`, () => {
-      expect(toHex(num(toNum(c)))).toEqual(input);
+      expect(toHex(num(toNum(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to oklab and back`, () => {
-      expect(toHex(oklab(toOklab(c)))).toEqual(input);
+      expect(toHex(oklab(toOklab(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to oklch and back`, () => {
-      expect(toHex(oklch(toOklch(c)))).toEqual(input);
+      expect(toHex(oklch(toOklch(c)))).toStrictEqual(input);
     });
 
     test(`${input} - to rgb and back`, () => {
-      expect(toHex(rgb(toRgb(c)))).toEqual(input);
+      expect(toHex(rgb(toRgb(c)))).toStrictEqual(input);
     });
   }
 });

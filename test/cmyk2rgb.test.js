@@ -13,6 +13,6 @@ describe('cmyk2rgb()', () => {
   ];
 
   test.each(tests)('%s', (name, input, expected) => {
-    expect(cmyk2rgb(input)).toEqual(expected);
+    expect(cmyk2rgb(input)).toStrictEqual(expected);
   });
 });

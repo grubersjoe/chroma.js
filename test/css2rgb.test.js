@@ -24,7 +24,7 @@ describe('css2rgb()', () => {
   ];
 
   test.each(tests)('css2rgb(%s) = %j', (input, expected) => {
-    expect(css2rgb(input)).toEqual(expected);
+    expect(css2rgb(input)).toStrictEqual(expected);
   });
 
   const invalid = [

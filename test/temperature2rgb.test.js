@@ -12,6 +12,6 @@ describe('temp2rgb()', () => {
   ];
 
   test.each(tests)('temp2rgb(%d) = %j', (input, expected) => {
-    expect(temp2rgb(input).map(Math.round)).toEqual(expected);
+    expect(temp2rgb(input).map(Math.round)).toStrictEqual(expected);
   });
 });

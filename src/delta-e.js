@@ -1,3 +1,5 @@
+import { toLab } from './io/lab';
+
 const { sqrt, pow, min, max, atan2, abs, cos, sin, exp, PI } = Math;
 
 /**
@@ -17,8 +19,8 @@ export const deltaE = function (a, b, Kl = 1, Kc = 1, Kh = 1) {
   const deg2rad = function (deg) {
     return (2 * PI * deg) / 360;
   };
-  const [L1, a1, b1] = Array.from(a.lab());
-  const [L2, a2, b2] = Array.from(b.lab());
+  const [L1, a1, b1] = toLab(a);
+  const [L2, a2, b2] = toLab(b);
   const avgL = (L1 + L2) / 2;
   const C1 = sqrt(pow(a1, 2) + pow(b1, 2));
   const C2 = sqrt(pow(a2, 2) + pow(b2, 2));

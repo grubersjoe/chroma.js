@@ -14,10 +14,10 @@ describe('analyze()', () => {
 
   test.each(tests)('%s', (name, input, key) => {
     const a = analyze(input, key);
-    expect(a.sum).toEqual(17);
-    expect(a.count).toEqual(6);
-    expect(a.max).toEqual(5);
-    expect(a.min).toEqual(1);
-    expect(a.domain).toEqual([1, 5]);
+    expect(a.sum).toStrictEqual(17);
+    expect(a.count).toStrictEqual(6);
+    expect(a.max).toStrictEqual(5);
+    expect(a.min).toStrictEqual(1);
+    expect(a.domain).toStrictEqual([1, 5]);
   });
 });

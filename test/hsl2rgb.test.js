@@ -16,7 +16,7 @@ describe('hsl2rgb()', () => {
 
   test.each(tests)('%s', (name, input, expected) => {
     const [h, s, l] = input;
-    expect(hsl2rgb(input)).toEqual(expected);
-    expect(hsl2rgb({ h, s, l })).toEqual(expected);
+    expect(hsl2rgb(input)).toStrictEqual(expected);
+    expect(hsl2rgb({ h, s, l })).toStrictEqual(expected);
   });
 });

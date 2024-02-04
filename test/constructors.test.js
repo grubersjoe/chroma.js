@@ -10,58 +10,58 @@ import { alpha } from '../src/ops/alpha';
 describe('color constructors', () => {
   test('named()', () => {
     const c = named('red');
-    expect(toHex(c)).toEqual('#ff0000');
-    expect(toRgb(c)).toEqual([255, 0, 0]);
+    expect(toHex(c)).toStrictEqual('#ff0000');
+    expect(toRgb(c)).toStrictEqual([255, 0, 0]);
     expect(() => named('invalid')).toThrow(`invalid argument "invalid"`);
   });
 
   test('hex colors', () => {
     const c = hex('#f00');
-    expect(toName(c)).toEqual('red');
-    expect(toHex(c)).toEqual('#ff0000');
-    expect(toHex(c, 'rgba')).toEqual('#ff0000ff');
-    expect(toHex(c, 'argb')).toEqual('#ffff0000');
-    expect(toRgb(c)).toEqual([255, 0, 0]);
+    expect(toName(c)).toStrictEqual('red');
+    expect(toHex(c)).toStrictEqual('#ff0000');
+    expect(toHex(c, 'rgba')).toStrictEqual('#ff0000ff');
+    expect(toHex(c, 'argb')).toStrictEqual('#ffff0000');
+    expect(toRgb(c)).toStrictEqual([255, 0, 0]);
   });
 
   test('hex color, no #', () => {
     const c = hex('F00');
-    expect(toName(c)).toEqual('red');
-    expect(toHex(c)).toEqual('#ff0000');
-    expect(toRgb(c)).toEqual([255, 0, 0]);
+    expect(toName(c)).toStrictEqual('red');
+    expect(toHex(c)).toStrictEqual('#ff0000');
+    expect(toRgb(c)).toStrictEqual([255, 0, 0]);
   });
 
   test('css color rgb', () => {
     const c = css('rgb(255 0 0)');
-    expect(toHex(c)).toEqual('#ff0000');
+    expect(toHex(c)).toStrictEqual('#ff0000');
   });
 
   test('css color rgba', () => {
     const c = css('rgba(128 0 128 0.5)');
-    expect(toHex(c)).toEqual('#80008080');
-    expect(toHex(c, 'rgb')).toEqual('#800080');
-    expect(alpha(c)).toEqual(0.5);
-    expect(toCss(c)).toEqual('rgba(128 0 128 0.5)');
+    expect(toHex(c)).toStrictEqual('#80008080');
+    expect(toHex(c, 'rgb')).toStrictEqual('#800080');
+    expect(alpha(c)).toStrictEqual(0.5);
+    expect(toCss(c)).toStrictEqual('rgba(128 0 128 0.5)');
   });
 
   test('css color hsla', () => {
     const c = css('hsla(240 100% 50% 0.5)');
-    expect(toHex(c)).toEqual('#0000ff80');
-    expect(toHex(c, 'rgb')).toEqual('#0000ff');
-    expect(alpha(c)).toEqual(0.5);
-    expect(toCss(c)).toEqual('rgba(0 0 255 0.5)');
+    expect(toHex(c)).toStrictEqual('#0000ff80');
+    expect(toHex(c, 'rgb')).toStrictEqual('#0000ff');
+    expect(alpha(c)).toStrictEqual(0.5);
+    expect(toCss(c)).toStrictEqual('rgba(0 0 255 0.5)');
   });
 
   test('hsla color', () => {
     const c = named('lightsalmon');
-    expect(toCss(c)).toEqual('rgb(255 160 122)');
-    expect(toCss(c, 'rgb')).toEqual('rgb(255 160 122)');
-    expect(toCss(c, 'hsl')).toEqual('hsl(17.14 100% 73.92%)');
+    expect(toCss(c)).toStrictEqual('rgb(255 160 122)');
+    expect(toCss(c, 'rgb')).toStrictEqual('rgb(255 160 122)');
+    expect(toCss(c, 'hsl')).toStrictEqual('hsl(17.14 100% 73.92%)');
   });
 
   test('rgb color', () => {
     const c = rgb(255, 0, 0);
-    expect(toHex(c)).toEqual('#ff0000');
+    expect(toHex(c)).toStrictEqual('#ff0000');
   });
 
   test('hsv black', () => {
@@ -71,26 +71,26 @@ describe('color constructors', () => {
 
   test('hsl black', () => {
     const hsla = toHsl(named('black'));
-    expect(hsla).toEqual([NaN, 0, 0, 1]);
+    expect(hsla).toStrictEqual([NaN, 0, 0, 1]);
   });
 
   test('default mode of rgb', () => {
-    expect(rgb([255, 0, 0])).toEqual(rgb([255, 0, 0], 'rgb'));
+    expect(rgb([255, 0, 0])).toStrictEqual(rgb([255, 0, 0], 'rgb'));
   });
 
   test('num color', () => {
-    expect(toHex(num(0xff0000))).toEqual('#ff0000');
-    expect(toNum(num(0xff0000))).toEqual(0xff0000);
+    expect(toHex(num(0xff0000))).toStrictEqual('#ff0000');
+    expect(toNum(num(0xff0000))).toStrictEqual(0xff0000);
 
-    expect(toHex(num(0x000000))).toEqual('#000000');
-    expect(toNum(num(0xff0000))).toEqual(0xff0000);
+    expect(toHex(num(0x000000))).toStrictEqual('#000000');
+    expect(toNum(num(0xff0000))).toStrictEqual(0xff0000);
 
-    expect(toHex(num(0xffffff))).toEqual('#ffffff');
-    expect(toNum(num(0xffffff))).toEqual(0xffffff);
+    expect(toHex(num(0xffffff))).toStrictEqual('#ffffff');
+    expect(toNum(num(0xffffff))).toStrictEqual(0xffffff);
 
-    expect(toHex(num(0x31ff98))).toEqual('#31ff98');
-    expect(toNum(num(0x31ff98))).toEqual(0x31ff98);
+    expect(toHex(num(0x31ff98))).toStrictEqual('#31ff98');
+    expect(toNum(num(0x31ff98))).toStrictEqual(0x31ff98);
 
-    expect(toNum(named('red'))).toEqual(0xff0000);
+    expect(toNum(named('red'))).toStrictEqual(0xff0000);
   });
 });

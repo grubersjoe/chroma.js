@@ -9,23 +9,23 @@ import { toRgba } from '../src/io/rgb';
 describe('average', () => {
   test('average colors', () => {
     const c = ['red', 'blue'].map(named);
-    expect(average(c)).toEqual(mix(...c));
+    expect(average(c)).toStrictEqual(mix(...c));
   });
 
   test('three colors', () => {
     const a = average(['blue', 'red', 'white'].map(named), 'rgb');
-    expect(toHex(a)).toEqual('#aa55aa');
+    expect(toHex(a)).toStrictEqual('#aa55aa');
   });
 
   test('alpha average', () => {
     const a = average([css('rgba(0 0 0 0)'), named('red')], 'rgb');
-    expect(toRgba(a)).toEqual([128, 0, 0, 0.5]);
-    expect(toRgba(a, false)).toEqual([127.5, 0, 0, 0.5]);
+    expect(toRgba(a)).toStrictEqual([128, 0, 0, 0.5]);
+    expect(toRgba(a, false)).toStrictEqual([127.5, 0, 0, 0.5]);
   });
 
   test('average in lab', () => {
     const a = average(['blue', 'red', 'white'].map(named), 'lab');
-    expect(toHex(a)).toEqual('#e26daf');
+    expect(toHex(a)).toStrictEqual('#e26daf');
   });
 
   test('average h in lch', () => {
@@ -36,13 +36,13 @@ describe('average', () => {
   test('average of same colors', () => {
     const c = hex('#e3c329');
     const a = average([c, c]);
-    expect(a).toEqual(c);
+    expect(a).toStrictEqual(c);
   });
 
   test('average in hsl of same colors', () => {
     const c = hex('#02c03a');
     const a = average([c, c], 'hsl');
-    expect(a).toEqual(c);
+    expect(a).toStrictEqual(c);
   });
 
   test('lrgb average', () => {
@@ -60,21 +60,21 @@ describe('average', () => {
     ].map(c => rgb(c));
 
     const a = average(c, 'lrgb');
-    expect(toHex(a)).toEqual('#98689c');
+    expect(toHex(a)).toStrictEqual('#98689c');
   });
 
   test('three colors, weighted rgb average', () => {
     const a = average(['blue', 'red', 'white'].map(named), 'rgb', [1, 1, 2]);
-    expect(toHex(a)).toEqual('#bf80bf');
+    expect(toHex(a)).toStrictEqual('#bf80bf');
   });
 
   test('three colors, weighted lrgb average', () => {
     const a = average(['blue', 'red', 'white'].map(named), 'lrgb', [1, 3, 2]);
-    expect(toHex(a)).toEqual('#e993b4');
+    expect(toHex(a)).toStrictEqual('#e993b4');
   });
 
   test('three colors, weighted hsl average', () => {
     const a = average(['blue', 'red', 'white'].map(named), 'hsl', [0.25, 1, 0.5]);
-    expect(toHex(a)).toEqual('#e58263');
+    expect(toHex(a)).toStrictEqual('#e58263');
   });
 });
