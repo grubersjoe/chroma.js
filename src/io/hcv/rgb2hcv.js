@@ -2,7 +2,7 @@ import { unpack } from '../../utils/unpack';
 import { rgb2gl } from '../gl/rgb2gl';
 
 export const rgb2hcv = (...args) => {
-  args = unpack(args, 'rgba');
+  args = unpack(args, 'rgb');
   const [r, g, b] = rgb2gl(...args);
   const max = Math.max(Math.max(r, g), b);
   const min = Math.min(Math.min(r, g), b);

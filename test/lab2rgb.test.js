@@ -40,10 +40,12 @@ describe('lab2rgb()', () => {
     ],
   ];
 
+  const round = v => Math.max(0, Math.round(v));
+
   test.each(tests)('%j -> %j', (input, expected) => {
-    expect(lab2rgb(input).map(Math.round)).toStrictEqual(expected);
+    expect(lab2rgb(input).map(round)).toStrictEqual(expected);
 
     const [l, a, b] = input;
-    expect(lab2rgb({ l, a, b }).map(Math.round)).toStrictEqual(expected);
+    expect(lab2rgb({ l, a, b }).map(round)).toStrictEqual(expected);
   });
 });

@@ -1,4 +1,3 @@
-import { limit } from '../../utils/limit';
 import { unpack } from '../../utils/unpack';
 import { assertValidArgs } from '../validate';
 import { LAB } from './lab-constants';
@@ -27,7 +26,7 @@ export const lab2rgb = (...args) => {
   g = xyz_rgb(-0.969266 * x + 1.8760108 * y + 0.041556 * z);
   b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
 
-  return [limit(r, 0, 255), limit(g, 0, 255), limit(b_, 0, 255), args[3] ?? 1];
+  return [r, g, b_, args[3] ?? 1];
 };
 
 const xyz_rgb = r => {
